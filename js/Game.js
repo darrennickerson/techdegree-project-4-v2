@@ -12,7 +12,7 @@ class Game {
       new Phrase("under the weather"),
       new Phrase("to make matters worse"),
     ];
-    this.activePhrase = this.getRandomPhrase();
+    this.activePhrase = null;
   }
 
   /**
@@ -20,9 +20,10 @@ class Game {
    */
 
   startGame() {
-    this.resetGame();
     overlay.style.display = "none";
+    this.activePhrase = this.getRandomPhrase();
     this.activePhrase.addPhraseToDisplay();
+    overlay.className = "start";
   }
 
   /**
@@ -39,7 +40,7 @@ class Game {
    */
 
   handleInteraction(e) {
-    let letter = e;
+    const letter = e;
     let letterObj;
     const letters = document.querySelectorAll(".key");
     letters.forEach((character) => {
@@ -71,7 +72,7 @@ class Game {
    */
 
   removeLife() {
-    let hearts = document.getElementsByClassName("tries");
+    const hearts = document.getElementsByClassName("tries");
     hearts[this.missed].firstElementChild.src = "images/lostHeart.png";
     this.missed += 1;
     if (this.missed === 5) {
@@ -86,7 +87,7 @@ class Game {
 */
 
   checkForWin() {
-    let letters = document.querySelectorAll(".letter");
+    const letters = document.querySelectorAll(".letter");
     let hide = 0;
     letters.forEach((letter) => {
       if (letter.classList.contains("hide")) {
@@ -104,7 +105,7 @@ class Game {
    */
 
   gameOver(result) {
-    let title = document.getElementById("game-over-message");
+    const title = document.getElementById("game-over-message");
     if (result === true) {
       overlay.classList.replace("start", "win");
       title.innerText = "Congrats! You won!";
@@ -114,14 +115,14 @@ class Game {
       title.innerText = "You didn't win this time.";
       overlay.style.display = "block";
     }
+    this.resetGame();
   }
 
   /**
    * Resets the game elements for a new game
    */
   resetGame() {
-    let hearts = document.getElementsByClassName("tries");
-    overlay.className = "start";
+    const hearts = document.getElementsByClassName("tries");
     document.querySelectorAll(".key").forEach((character) => {
       character.classList.remove("wrong", "chosen");
       character.disabled = false;
