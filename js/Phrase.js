@@ -6,6 +6,11 @@ class Phrase {
   constructor(phrase) {
     this.phrase = phrase;
   }
+
+  /**
+   * Display phrase on game board
+   */
+
   addPhraseToDisplay() {
     const phraseSection = document.getElementById("phrase");
     let html = "";
@@ -20,9 +25,19 @@ class Phrase {
     phraseSection.firstElementChild.innerHTML = html;
   }
 
+  /**
+   * Checks if passed letter is in phrase
+   * @param (string) letter - Letter to check
+   */
+
   checkLetter(letter) {
     return this.phrase.includes(letter);
   }
+
+  /**
+   * Displays passed letter on screen after a match is found
+   * @param (string) letter - Letter to display
+   */
 
   showMatchedLetter(letter) {
     document.querySelectorAll(".letter").forEach((character) => {

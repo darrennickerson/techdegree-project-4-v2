@@ -15,15 +15,28 @@ class Game {
     this.activePhrase = this.getRandomPhrase();
   }
 
+  /**
+   * Begins game by selecting a random phrase and displaying it to user
+   */
+
   startGame() {
     this.resetGame();
     overlay.style.display = "none";
     this.activePhrase.addPhraseToDisplay();
   }
 
+  /**
+   * Selects random phrase from phrases property
+   * @return {Object} Phrase object chosen to be used
+   */
+
   getRandomPhrase() {
     return this.phrases[Math.floor(Math.random() * this.phrases.length)];
   }
+
+  /**
+   * handles the interation with the user. button clicks and keystrokes
+   */
 
   handleInteraction(e) {
     let letter = e;
@@ -51,6 +64,12 @@ class Game {
     }
   }
 
+  /**
+   * Increases the value of the missed property
+   * Removes a life from the scoreboard
+   * Checks if player has remaining lives and ends game if player is out
+   */
+
   removeLife() {
     let hearts = document.getElementsByClassName("tries");
     hearts[this.missed].firstElementChild.src = "images/lostHeart.png";
@@ -59,6 +78,12 @@ class Game {
       this.gameOver(false);
     }
   }
+
+  /**
+* Checks for winning move
+* @return {boolean} True if game has been won, false if game wasn't
+  won
+*/
 
   checkForWin() {
     let letters = document.querySelectorAll(".letter");
@@ -72,6 +97,12 @@ class Game {
       return true;
     }
   }
+
+  /**
+   * Displays game over message
+   * @param {boolean} gameWon - Whether or not the user won the game
+   */
+
   gameOver(result) {
     let title = document.getElementById("game-over-message");
     if (result === true) {
@@ -84,6 +115,10 @@ class Game {
       overlay.style.display = "block";
     }
   }
+
+  /**
+   * Resets the game elements for a new game
+   */
   resetGame() {
     let hearts = document.getElementsByClassName("tries");
     overlay.className = "start";

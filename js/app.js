@@ -7,6 +7,10 @@ const start = document.getElementById("btn__reset");
 const qwerty = document.getElementById("qwerty");
 const page = document.querySelector("html");
 let game;
+
+/**
+ * Event listeners for starting the game, and button clicks and keystrokes
+ */
 start.addEventListener("click", () => {
   game = new Game();
   game.startGame();
@@ -19,5 +23,7 @@ qwerty.addEventListener("click", (e) => {
 });
 
 page.addEventListener("keyup", (e) => {
-  game.handleInteraction(e.key);
+  if (/^[a-z]/.test(e.key)) {
+    game.handleInteraction(e.key);
+  }
 });
